@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: supratim-task-tracker
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build && npm --prefix server install
+    startCommand: npm --prefix server start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
