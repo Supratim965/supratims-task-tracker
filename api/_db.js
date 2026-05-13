@@ -1,5 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
+if (!process.env.MONGODB_URI) {
+  throw new Error('MONGODB_URI environment variable is not set. Add it in Vercel → Settings → Environment Variables.');
+}
+
 export const COLLECTIONS = {
   users:             process.env.MONGODB_COLLECTION_USERS              || 'users',
   tasks:             process.env.MONGODB_COLLECTION_TASKS              || 'tasks',
