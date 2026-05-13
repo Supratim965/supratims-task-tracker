@@ -7,12 +7,12 @@ export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, re
       <h2>{editId ? "Edit Task" : "Create Task"}</h2>
       <form className="stack" onSubmit={submitTask}>
         <input placeholder="Task title" value={taskForm.title} onChange={(e) => setTaskForm({ ...taskForm, title: e.target.value })} required />
-        <textarea placeholder="Description" value={taskForm.description} onChange={(e) => setTaskForm({ ...taskForm, description: e.target.value })} />
-        <input placeholder="Bug/Test reference" value={taskForm.bug_reference} onChange={(e) => setTaskForm({ ...taskForm, bug_reference: e.target.value })} />
-        <input type="date" value={taskForm.due_date} onChange={(e) => setTaskForm({ ...taskForm, due_date: e.target.value })} />
+        <textarea placeholder="Description" value={taskForm.description} onChange={(e) => setTaskForm({ ...taskForm, description: e.target.value })} required />
+        <input placeholder="Bug/Test reference" value={taskForm.bug_reference} onChange={(e) => setTaskForm({ ...taskForm, bug_reference: e.target.value })} required />
+        <input type="date" value={taskForm.due_date} onChange={(e) => setTaskForm({ ...taskForm, due_date: e.target.value })} required />
         <div className="inline">
-          <select value={taskForm.priority} onChange={(e) => setTaskForm({ ...taskForm, priority: e.target.value })}>{priorities.map((p) => <option key={p}>{p}</option>)}</select>
-          <select value={taskForm.status} onChange={(e) => setTaskForm({ ...taskForm, status: e.target.value })}>{statuses.map((s) => <option key={s}>{s}</option>)}</select>
+          <select value={taskForm.priority} onChange={(e) => setTaskForm({ ...taskForm, priority: e.target.value })} required>{priorities.map((p) => <option key={p}>{p}</option>)}</select>
+          <select value={taskForm.status} onChange={(e) => setTaskForm({ ...taskForm, status: e.target.value })} required>{statuses.map((s) => <option key={s}>{s}</option>)}</select>
         </div>
         <div className="inline">
           <SearchableUserSelect
@@ -21,6 +21,7 @@ export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, re
             value={taskForm.assigned_developer_id}
             placeholder="Search/select Developer"
             onChange={(id) => setTaskForm({ ...taskForm, assigned_developer_id: id })}
+            required
           />
           <SearchableUserSelect
             listId="designer-assignment-list"
@@ -28,6 +29,7 @@ export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, re
             value={taskForm.assigned_designer_id}
             placeholder="Search/select Designer"
             onChange={(id) => setTaskForm({ ...taskForm, assigned_designer_id: id })}
+            required
           />
           <select value={taskForm.assigned_qa_id} onChange={(e) => setTaskForm({ ...taskForm, assigned_qa_id: e.target.value })}>
             <option value="">Assign QA</option>{qas.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}

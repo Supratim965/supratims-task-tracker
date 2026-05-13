@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-export default function SearchableUserSelect({ listId, users, value, onChange, placeholder }) {
+export default function SearchableUserSelect({ listId, users, value, onChange, placeholder, required }) {
   const selectedName = useMemo(() => {
     const selected = users.find((user) => String(user.id) === String(value || ""));
     return selected ? selected.name : "";
@@ -24,7 +24,7 @@ export default function SearchableUserSelect({ listId, users, value, onChange, p
 
   return (
     <>
-      <input list={listId} value={inputValue} onChange={handleInputChange} placeholder={placeholder} />
+      <input list={listId} value={inputValue} onChange={handleInputChange} placeholder={placeholder} required={required} />
       <datalist id={listId}>
         {users.map((user) => (
           <option key={user.id} value={user.name} />
