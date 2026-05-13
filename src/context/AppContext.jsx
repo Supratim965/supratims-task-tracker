@@ -128,7 +128,7 @@ export function AppProvider({ children }) {
   const submitQaLog = async (event) => {
     event.preventDefault();
     try {
-      await api("/qa-logs", { method: "POST", body: JSON.stringify({ ...qaForm, task_id: Number(qaForm.task_id) }) });
+      await api("/qa-logs", { method: "POST", body: JSON.stringify({ ...qaForm, task_id: qaForm.task_id }) });
       toast.success("QA note added");
       setQaForm(emptyQaForm);
       fetchAll();
