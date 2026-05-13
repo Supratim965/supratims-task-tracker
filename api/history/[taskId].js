@@ -1,9 +1,15 @@
 import { getDb, COLLECTIONS, serializeAll, toId } from '../_db.js';
 
 export default async function handler(req, res) {
-  const db      = await getDb();
-  const taskOid = toId(req.query.taskId);
-  if (!taskOid) return res.status(400).json({ error: 'Invalid taskId' });
+  const db = await getDb();
+  // Vercel routes taskId from the filename [taskId].js
+  let taskIdStr = req.query.taskId;
+  
+  const taskOid = toId(taskIdStr);
+  if (!taskOid) {
+    console.warn('History requested for invalid ID:', taskIdStr);
+    return res.json({ statuses: [], assignments: [] });
+  }
 
   try {
     const [statusResult, assignResult] = await Promise.all([
@@ -27,8 +33,12 @@ export default async function handler(req, res) {
       ]).toArray(),
     ]);
 
-    res.json({ statuses: serializeAll(statusResult), assignments: serializeAll(assignResult) });
+    res.json({ 
+      statuses: serializeAll(statusResult), 
+      assignments: serializeAll(assignResult) 
+    });
   } catch (e) {
+    console.error('History API Error:', e.message);
     res.status(500).json({ error: e.message });
   }
 }

@@ -21,9 +21,9 @@ export default function TaskTable({ loading, filteredTasks, startEdit, removeTas
                   <td>{task.qa_name || "-"}</td>
                   <td>{task.updated_at?.replace("T", " ").slice(0, 16) || "-"}</td>
                   <td>
-                    <button onClick={() => startEdit(task)}>Edit</button>
-                    <button onClick={() => removeTask(task.id)} className="danger">Delete</button>
-                    <button onClick={() => setActiveTaskId(task.id)}>History</button>
+                    <button type="button" onClick={() => startEdit(task)}>Edit</button>
+                    <button type="button" onClick={() => removeTask(task.id)} className="danger">Delete</button>
+                    <button type="button" onClick={() => setActiveTaskId(task.id)}>History</button>
                   </td>
                 </tr>
               ))}
