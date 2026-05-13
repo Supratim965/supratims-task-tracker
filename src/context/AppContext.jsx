@@ -20,6 +20,7 @@ export function AppProvider({ children }) {
   const [query, setQuery] = useState("SELECT * FROM tasks WHERE status = 'QA Failed';");
   const [queryRows, setQueryRows] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const developers = useMemo(() => users.filter((u) => u.role === "Developer"), [users]);
   const designers = useMemo(() => users.filter((u) => u.role === "Designer"), [users]);
@@ -79,6 +80,8 @@ export function AppProvider({ children }) {
 
   const submitTask = async (event) => {
     event.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     try {
       const payload = {
         ...taskForm,
@@ -97,6 +100,8 @@ export function AppProvider({ children }) {
       fetchAll();
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -127,6 +132,8 @@ export function AppProvider({ children }) {
 
   const submitQaLog = async (event) => {
     event.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     try {
       await api("/qa-logs", { method: "POST", body: JSON.stringify({ ...qaForm, task_id: qaForm.task_id }) });
       toast.success("QA note added");
@@ -134,6 +141,8 @@ export function AppProvider({ children }) {
       fetchAll();
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -210,6 +219,7 @@ export function AppProvider({ children }) {
         setQuery,
         queryRows,
         loading,
+        submitting,
         developers,
         designers,
         qas,

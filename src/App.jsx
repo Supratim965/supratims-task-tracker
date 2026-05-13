@@ -31,6 +31,7 @@ function AppContent() {
     setQuery,
     queryRows,
     loading,
+    submitting,
     developers,
     designers,
     qas,
@@ -56,8 +57,8 @@ function AppContent() {
       </header>
 
       <main className="grid">
-        <TaskForm editId={editId} taskForm={taskForm} setTaskForm={setTaskForm} submitTask={submitTask} resetTaskForm={resetTaskForm} developers={developers} designers={designers} qas={qas} />
-        <QAForm qaForm={qaForm} setQaForm={setQaForm} submitQaLog={submitQaLog} tasks={tasks} />
+        <TaskForm editId={editId} taskForm={taskForm} setTaskForm={setTaskForm} submitTask={submitTask} resetTaskForm={resetTaskForm} developers={developers} designers={designers} qas={qas} submitting={submitting} />
+        <QAForm qaForm={qaForm} setQaForm={setQaForm} submitQaLog={submitQaLog} tasks={tasks} submitting={submitting} />
         <FiltersBar filters={filters} setFilters={setFilters} developers={developers} designers={designers} qas={qas} />
         <TeamMemberManager
           developers={developers}

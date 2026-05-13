@@ -1,6 +1,6 @@
 import { qaResults } from "../constants";
 
-export default function QAForm({ qaForm, setQaForm, submitQaLog, tasks }) {
+export default function QAForm({ qaForm, setQaForm, submitQaLog, tasks, submitting }) {
   return (
     <section className="card">
       <h2>QA Workflow</h2>
@@ -15,7 +15,7 @@ export default function QAForm({ qaForm, setQaForm, submitQaLog, tasks }) {
           <select value={qaForm.qa_result} onChange={(e) => setQaForm({ ...qaForm, qa_result: e.target.value })}>{qaResults.map((r) => <option key={r}>{r}</option>)}</select>
           <input placeholder="Retesting status" value={qaForm.retesting_status} onChange={(e) => setQaForm({ ...qaForm, retesting_status: e.target.value })} />
         </div>
-        <button type="submit">Save QA Log</button>
+        <button type="submit" disabled={submitting}>{submitting ? "Saving..." : "Save QA Log"}</button>
       </form>
     </section>
   );

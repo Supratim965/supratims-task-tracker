@@ -1,7 +1,7 @@
 import { priorities, statuses } from "../constants";
 import SearchableUserSelect from "./SearchableUserSelect";
 
-export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, resetTaskForm, developers, designers, qas }) {
+export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, resetTaskForm, developers, designers, qas, submitting }) {
   return (
     <section className="card">
       <h2>{editId ? "Edit Task" : "Create Task"}</h2>
@@ -36,8 +36,8 @@ export default function TaskForm({ editId, taskForm, setTaskForm, submitTask, re
           </select>
         </div>
         <div className="inline">
-          <button type="submit">{editId ? "Update Task" : "Create Task"}</button>
-          {editId && <button type="button" onClick={resetTaskForm}>Cancel</button>}
+          <button type="submit" disabled={submitting}>{submitting ? "Processing..." : (editId ? "Update Task" : "Create Task")}</button>
+          {editId && <button type="button" onClick={resetTaskForm} disabled={submitting}>Cancel</button>}
         </div>
       </form>
     </section>
