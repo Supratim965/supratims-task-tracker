@@ -1,76 +1,51 @@
-# QA Task Tracker Portal
+# Supratim's Task Tracker Portal
 
-Responsive internal QA-focused task management system with:
+A production-ready Task Management application with a specialized workflow for Developers, Designers, and QA teams.
 
-- Task CRUD and assignment workflow
-- QA logs, retesting updates, and audit/history timeline
-- Search, filter, and sorting across task metadata
-- Analytics dashboard (status, priority, bug trends, developer issue counts)
-- Secure SQL console with `SELECT`-only query policy
+## 🚀 Live Deployment
+Hosted on **Vercel**: [https://supratims-task-tracker.vercel.app](https://supratims-task-tracker.vercel.app)
 
-## Tech stack
+## 🛠️ Technology Stack
+- **Frontend**: React 19 (Vite)
+- **Backend**: Vercel Serverless Functions (Node.js)
+- **Database**: MongoDB Atlas (Cloud)
+- **State Management**: React Context API
+- **Styling**: Vanilla CSS (Modern Design System)
+- **Notifications**: React Toastify
 
-- Frontend: React + Vite + Recharts + React Toastify
-- Backend: Node.js + Express
-- Database: SQLite (`server/qa_tracker.db`)
+## ✨ Key Features
+- **QA Workflow**: Specialized logging for testing notes, bug remarks, and retesting status.
+- **Audit Trail**: Full history tracking of every status change and task assignment.
+- **Team Management**: Real-time management of Developers, Designers, and QA members.
+- **Analytics Dashboard**: Visual charts for bug trends, task priority distribution, and developer performance.
+- **Optimized UI**: 
+  - Mandatory field validation (frontend & backend).
+  - Searchable user selection for large teams.
+  - Concurrency control (prevents duplicate task creation).
+  - Dark/Light mode support.
 
-## Run locally
+## 📦 Migration Details
+This project has been migrated from a local SQLite-based Express server to a modern Serverless architecture on Vercel. 
+- **Legacy Files**: The `server/` directory contains the legacy code for reference but is no longer used for the production site.
+- **API**: All backend logic is now modularized in the `api/` directory.
 
-Open 2 terminals:
+## 🛠️ Local Development
 
-1) Start backend API
+1. **Clone the repo**
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Set up Environment Variables**:
+   Create a `.env` file with:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   MONGODB_DB_NAME=qa_tracker
+   ```
+4. **Run Dev Server**:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-cd server
-npm install
-npm run dev
-```
-
-2) Start frontend
-
-```bash
-npm install
-npm run dev
-```
-
-Frontend runs at `http://localhost:5173` and API at `http://localhost:4000`.
-
-## Deploy on Render (free)
-
-This repo includes `render.yaml` for one-click setup.
-
-1. Push this project to GitHub.
-2. In Render, choose **New +** -> **Blueprint**.
-3. Connect your GitHub repo and select this repository.
-4. Deploy.
-
-Render will create one free web service and provide a URL like:
-
-`https://supratim-task-tracker.onrender.com`
-
-Notes:
-
-- First request after idle may take ~30-60s on free tier.
-- SQLite file storage is not durable on free instances. For long-term persistent data, move to a managed database.
-
-## SQL console policy
-
-Allowed:
-
-- `SELECT` queries
-
-Blocked:
-
-- `DROP`
-- `DELETE`
-- `UPDATE`
-- `ALTER`
-- `INSERT`
-- `CREATE`
-- `TRUNCATE`
-
-Example:
-
-```sql
-SELECT * FROM tasks WHERE status = 'QA Failed';
-```
+---
+*Maintained by Antigravity AI Assistant.*
